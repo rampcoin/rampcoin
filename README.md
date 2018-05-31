@@ -1,3 +1,3 @@
-FooCoin (FOO)
+rampcoinn (FOO)
 
 Blah, blah, blah.
