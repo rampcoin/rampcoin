@@ -2002,7 +2002,7 @@ bool LoadBlockIndex(bool fAllowNew)
     
         
         // Genesis block
-        const char* pszTimestamp = "I am creating my new altcoin";
+        const char* pszTimestamp = "1527764499";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2014,24 +2014,26 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1527760089; //epochtime
+        block.nTime    = 1527764499; //epochtime
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 1345972;
+        block.nNonce   = 1064774;
 
         if (fTestNet)
         {
-            block.nTime    = 1527760089;
-            block.nNonce   = 440824;
+            block.nTime    = 1527764499;
+            block.nNonce   = 1064774;
         }
 
         //// debug print
         printf("%s\n", block.GetHash().ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x2fc1b7ef46270c053711fbae934cf7f83378efd4b3e158079451d9c6c90e4700"));
+		
+		////cout << block.hashMerkleRoot.ToString().c_str(); 
+        assert(block.hashMerkleRoot == uint256("oxb22b8137d4ce30af2c2301006c9fa3146d4033b550b3c2f605a38f3db4ff5798"));
 
         // If genesis block hash does not match, then generate new genesis hash.
-        if (false && block.GetHash() != hashGenesisBlock)
+        if (true && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
@@ -2056,6 +2058,13 @@ bool LoadBlockIndex(bool fAllowNew)
                     ++block.nTime;
                 }
             }
+			cout << block.nTime; 
+			cout << "\n"; 
+			cout << block.nNonce; 
+			cout << "\n"; 
+			cout << block.GetHash().ToString().c_str(); 
+			cout << "\n"; 
+			
             printf("block.nTime = %u \n", block.nTime);
             printf("block.nNonce = %u \n", block.nNonce);
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
